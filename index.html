@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f1e8dc">
+<title>Haillie's Birthday Club ♡</title>
+<style>
+:root{--cream:#f1e8dc;--paper:#fffaf3;--lilac:#b9a6ce;--lilac2:#8e79a7;--brown:#604a3b;--muted:#987f6b;--felt:#71866c;--gold:#d6ad5d}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(circle at 15% 10%,#c9b9d933,transparent 30%),radial-gradient(circle at 90% 90%,#a98d7330,transparent 30%),var(--cream);color:var(--brown);font-family:Georgia,"Times New Roman",serif;display:grid;place-items:center;padding:16px}
+button{font:inherit;cursor:pointer}
+.screen{display:none;width:min(100%,940px);animation:fade .35s ease}
+.screen.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:#fffaf3e8;border:1px solid #604a3b20;border-radius:25px;padding:clamp(22px,5vw,48px);text-align:center;box-shadow:0 18px 55px #604a3b13}
+.eyebrow{font:700 10px Arial,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(2rem,6vw,4.25rem);line-height:1.08;font-weight:500;margin:17px 0}
+h2{font-size:clamp(1.5rem,4vw,2.4rem);font-weight:500;margin:8px 0}
+p{line-height:1.7}
+.sub{max-width:520px;margin:0 auto 26px;color:var(--muted)}
+.btn{border:0;border-radius:99px;background:var(--lilac);color:white;padding:14px 27px;font:700 11px Arial,sans-serif;letter-spacing:.13em;box-shadow:0 5px 0 #9784b0;transition:.15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 7px 0 #9784b0}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #9784b0}
+.btn.alt{background:#e4d7c8;color:var(--brown);box-shadow:0 4px 0 #c7b4a1}
+.note{font:11px Arial,sans-serif;color:#a28d7b;margin-top:20px}
+.stars{font-size:24px;color:var(--lilac2)}
+.gamecard{padding:clamp(12px,3vw,26px)}
+.gamehead{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;text-align:left;margin:0 3px 15px}
+.score{display:flex;gap:8px;font:700 12px Arial,sans-serif}
+.score span{background:var(--cream);border-radius:10px;padding:10px 12px}
+.score .player{background:#e8dff0}
+.tableframe{background:#4d3a2d;padding:clamp(8px,2vw,16px);border-radius:18px;box-shadow:inset 0 0 0 2px #92765c,0 10px 25px #604a3b20}
+canvas{display:block;width:100%;height:auto;border-radius:8px;touch-action:none}
+.controls{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;margin-top:15px}
+.controls label{font:12px Arial,sans-serif}
+input[type=range]{width:min(170px,40vw);accent-color:var(--lilac2);vertical-align:middle}
+.hint{font:12px/1.5 Arial,sans-serif;color:var(--muted);min-height:20px;margin:12px 0 0}
+.trophy{display:inline-block;font-size:clamp(6rem,22vw,10rem);filter:drop-shadow(0 8px 0 #d7c7a7);transition:transform .2s}
+.trophy:hover{transform:rotate(-7deg) scale(1.07)}
+.trophybutton{border:0;background:none;padding:0}
+.envelope{font-size:54px;margin:12px}
+.letter{background:#f4eadb;border:1px solid #ddcbb6;border-radius:8px;padding:clamp(20px,5vw,38px);max-width:620px;margin:22px auto;text-align:left;box-shadow:0 7px 20px #604a3b0c}
+.letter p{white-space:pre-line}
+.mini{font:11px Arial,sans-serif;color:var(--muted)}
+@media(max-width:540px){body{padding:10px}.card{border-radius:18px}.gamehead{justify-content:center;text-align:center}.score{width:100%;justify-content:center}}
+</style>
+</head>
+<body>
+<main>
+<section id="intro" class="screen active">
+ <div class="card">
+  <div class="stars">✦ ♡ ✦</div><div class="eyebrow">a special invitation</div>
+  <h1>fiquei sabendo que você é a aniversariante do dia...</h1>
+  <p class="sub">você aceitaria o desafio?</p>
+  <button class="btn" id="play">PLAY ♡</button>
+  <div class="note">uma partida. um prêmio. boa sorte.</div>
+ </div>
+</section>
+
+<section id="game" class="screen">
+ <div class="card gamecard">
+  <div class="gamehead"><div><div class="eyebrow">birthday challenge</div><h2>haillie <span style="color:var(--lilac2)">vs.</span> eloy</h2></div>
+  <div class="score"><span class="player">haillie: <b id="hs">0</b></span><span>eloy: <b id="es">0</b></span></div></div>
+  <div class="tableframe"><canvas id="pool" width="900" height="500" aria-label="Sinuca. Arraste para mirar e solte para tacar."></canvas></div>
+  <div class="controls">
+   <label>força <input id="power" type="range" min="15" max="100" value="62"></label>
+   <button class="btn" id="shoot">TACAR</button><button class="btn alt" id="restart">RECOMEÇAR</button>
+  </div>
+  <p class="hint" id="hint">arraste a partir da bola branca para mirar. solte ou toque em TACAR.</p>
+ </div>
+</section>
+
+<section id="win" class="screen">
+ <div class="card">
+  <div class="eyebrow">match finished</div><h1>parabéns, campeã!</h1>
+  <p class="sub">você venceu. infelizmente, eu sou péssimo nisso.</p>
+  <button class="trophybutton" id="trophy" aria-label="Clique para abrir o presente"><span class="trophy">🏆</span></button>
+  <p><b>seu prêmio está esperando por você.</b></p>
+  <button class="btn" id="giftbutton">ABRIR MEU PRÊMIO ♡</button>
+  <div class="note">clique no troféu para continuar</div>
+ </div>
+</section>
+
+<section id="gift" class="screen">
+ <div class="card">
+  <div class="stars">♡ ✦ ♡</div><div class="eyebrow">your birthday gift</div>
+  <h1>um presente feito pra você.</h1>
+  <p class="sub">antes da carta, tem um mural esperando pelas nossas lembranças.</p>
+  <button class="btn" id="photos">ABRIR MURAL DE FOTOS</button>
+  <div class="note">o mural fica reservado para adicionarmos as seis fotos depois.</div>
+ </div>
+</section>
+
+<section id="letter" class="screen">
+ <div class="card">
+  <div class="envelope">💌</div><div class="eyebrow">a letter for haillie</div>
+  <h1>feliz aniversário, haillie ♡</h1>
+  <div class="letter">
+   <p>haillie,
+
+   feliz aniversário! espero que seu dia seja tão especial quanto você e que esse novo ciclo te traga um monte de motivos pra sorrir, pessoas boas por perto e momentos que valham a pena guardar.
+
+   fiz esse pequeno site pra te tirar um sorriso — mesmo que, aparentemente, meu talento na sinuca tenha sido sacrificado pra isso.
+
+   obrigada pela sua amizade, pelas conversas, pelas risadas e por fazer parte da minha vida. que nunca faltem coisas bonitas pra você viver e lembrar.
+
+   aproveita muito seu dia. você merece.
+
+   com carinho,
+   eloy ♡</p>
+  </div>
+  <button class="btn alt" id="backgift">VOLTAR AO PRESENTE</button>
+ </div>
+</section>
+
+<section id="photoscreen" class="screen">
+ <div class="card">
+  <div class="eyebrow">little memories</div><h1>nosso mural ♡</h1>
+  <p class="sub">essa parte fica reservada para as seis fotos: três suas e três nossas. vamos preencher quando você escolher as imagens.</p>
+  <div style="font-size:40px;color:var(--lilac2)">▧ ▧ ▧<br>▧ ▧ ▧</div>
+  <button class="btn alt" id="backletter">LER A CARTA</button>
+ </div>
+</section>
+</main>
+
+<script>
+(() => {
+const $=id=>document.getElementById(id);
+const screens=[...document.querySelectorAll('.screen')];
+function show(id){screens.forEach(s=>s.classList.toggle('active',s.id===id));}
+$('play').onclick=()=>{show('game');newGame();};
+$('trophy').onclick=$('giftbutton').onclick=()=>show('gift');
+$('photos').onclick=()=>show('photoscreen');
+$('backletter').onclick=()=>show('letter');
+$('backgift').onclick=()=>show('gift');
+
+const canvas=$('pool'),ctx=canvas.getContext('2d'),W=900,H=500;
+const rail=43,br=12,pocketR=26;
+const T={x:rail,y:rail,w:W-2*rail,h:H-2*rail};
+const pockets=[[T.x,T.y],[W/2,T.y],[T.x+T.w,T.y],[T.x,T.y+T.h],[W/2,T.y+T.h],[T.x+T.w,T.y+T.h]];
+const palette=['#b9a5cf','#c98e79','#d6ad5d','#899b80','#8d76a3','#c5a38a','#d9c8a7','#a56d72','#9b9cbd','#d1b4c2','#a6b4a0','#e0c5a0','#b1a0c7','#c58d79','#b5a58e'];
+let balls=[],cue,aim={x:1,y:0},drag=false,dragOrigin=null,moving=false,turn='you',gameOver=false,botTimeout=null;
+let hs=0,es=0,shotPocketed=0,shotCount=0;
+
+function ball(x,y,color,num=0){return{x,y,vx:0,vy:0,color,num,active:true};}
+function newGame(){
+ clearTimeout(botTimeout);hs=0;es=0;turn='you';gameOver=false;moving=false;shotCount=0;
+ $('hs').textContent='0';$('es').textContent='0';
+ cue=ball(T.x+T.w*.25,T.y+T.h/2,'#fffaf3');
+ balls=[cue];let n=1;const apex=T.x+T.w*.68,cy=T.y+T.h/2;
+ // 14 object balls, triangle rack
+ for(let col=0;col<5;col++)for(let row=0;row<=col;row++){
+  const x=apex+col*(br*2+1),y=cy+(row-col/2)*(br*2+1);
+  balls.push(ball(x,y,palette[(n-1)%palette.length],n++));
+ }
+ aim={x:1,y:0};$('hint').textContent='sua vez! arraste a partir da bola branca para mirar.';
+ draw();
+}
+function draw(){
+ ctx.clearRect(0,0,W,H);
+ ctx.fillStyle='#71866c';ctx.fillRect(T.x,T.y,T.w,T.h);
+ ctx.strokeStyle='#ffffff12';ctx.lineWidth=1;
+ for(let x=T.x+20;x<T.x+T.w;x+=30){ctx.beginPath();ctx.moveTo(x,T.y);ctx.lineTo(x,T.y+T.h);ctx.stroke();}
+ // table markings
+ ctx.strokeStyle='#e5ddcf66';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(T.x+T.w*.25,T.y);ctx.lineTo(T.x+T.w*.25,T.y+T.h);ctx.stroke();
+ pockets.forEach(([x,y])=>{ctx.beginPath();ctx.arc(x,y,pocketR,0,Math.PI*2);ctx.fillStyle='#29251f';ctx.fill();ctx.strokeStyle='#a68a6d';ctx.lineWidth=4;ctx.stroke();});
+ if(turn==='you'&&!moving&&!gameOver){
+  ctx.save();ctx.setLineDash([7,7]);ctx.strokeStyle='#fffaf3bb';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(cue.x,cue.y);ctx.lineTo(cue.x+aim.x*145,cue.y+aim.y*145);ctx.stroke();ctx.restore();
+  const len=100;ctx.strokeStyle='#c6a47e';ctx.lineWidth=5;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(cue.x-aim.x*len,cue.y-aim.y*len);ctx.lineTo(cue.x-aim.x*(br+5),cue.y-aim.y*(br+5));ctx.stroke();
+ }
+ balls.forEach(b=>{
+  if(!b.active)return;
+  ctx.beginPath();ctx.arc(b.x,b.y,br,0,Math.PI*2);ctx.fillStyle=b.color;ctx.fill();ctx.strokeStyle='#3b302855';ctx.lineWidth=1.5;ctx.stroke();
+  ctx.beginPath();ctx.arc(b.x-br*.3,b.y-br*.35,br*.25,0,Math.PI*2);ctx.fillStyle='#ffffff99';ctx.fill();
+  if(b.num){ctx.beginPath();ctx.arc(b.x,b.y,4.2,0,Math.PI*2);ctx.fillStyle='#fffaf0';ctx.fill();}
+ });
+}
+function pointer(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*W/r.width,y:(e.clientY-r.top)*H/r.height};}
+function aimFrom(p){let dx=cue.x-p.x,dy=cue.y-p.y,d=Math.hypot(dx,dy)||1;aim={x:dx/d,y:dy/d};}
+canvas.addEventListener('pointerdown',e=>{
+ if(turn!=='you'||moving||gameOver)return;
+ drag=true;dragOrigin=pointer(e);canvas.setPointerCapture(e.pointerId);aimFrom(dragOrigin);draw();
+});
+canvas.addEventListener('pointermove',e=>{if(drag){aimFrom(pointer(e));draw();}});
+canvas.addEventListener('pointerup',()=>{drag=false;});
+canvas.addEventListener('pointercancel',()=>{drag=false;});
+
+$('shoot').onclick=()=>{
+ if(turn!=='you'||moving||gameOver)return;
+ const p=Number($('power').value);
+ cue.vx=aim.x*(p*.12);cue.vy=aim.y*(p*.12);
+ turn='playerShot';moving=true;shotPocketed=0;shotCount++;$('hint').textContent='sua tacada...';requestAnimationFrame(tick);
+};
+$('restart').onclick=newGame;
+
+function tick(){
+ let activeMotion=false;
+ // integrate and cushion collisions
+ for(const b of balls){
+  if(!b.active)continue;
+  b.x+=b.vx;b.y+=b.vy;b.vx*=.988;b.vy*=.988;
+  if(Math.abs(b.vx)<.045)b.vx=0;if(Math.abs(b.vy)<.045)b.vy=0;
+  if(b.vx||b.vy)activeMotion=true;
+  if(b.x<T.x+br){b.x=T.x+br;b.vx=Math.abs(b.vx)*.78;}
+  if(b.x>T.x+T.w-br){b.x=T.x+T.w-br;b.vx=-Math.abs(b.vx)*.78;}
+  if(b.y<T.y+br){b.y=T.y+br;b.vy=Math.abs(b.vy)*.78;}
+  if(b.y>T.y+T.h-br){b.y=T.y+T.h-br;b.vy=-Math.abs(b.vy)*.78;}
+  if(pockets.some(([px,py])=>Math.hypot(b.x-px,b.y-py)<pocketR-2)){
+   if(b===cue){b.x=T.x+T.w*.25;b.y=T.y+T.h/2;b.vx=0;b.vy=0;}
+   else{b.active=false;if(turn==='playerShot')shotPocketed++;}
+  }
+ }
+ // collision response for equal-mass balls
+ for(let i=0;i<balls.length;i++)for(let j=i+1;j<balls.length;j++){
+  const a=balls[i],b=balls[j];if(!a.active||!b.active)continue;
+  let dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy),min=br*2;
+  if(d>0&&d<min){
+   const nx=dx/d,ny=dy/d,over=min-d;
+   a.x-=nx*over/2;a.y-=ny*over/2;b.x+=nx*over/2;b.y+=ny*over/2;
+   const rel=(a.vx-b.vx)*nx+(a.vy-b.vy)*ny;
+   if(rel>0){a.vx-=rel*nx*.96;a.vy-=rel*ny*.96;b.vx+=rel*nx*.96;b.vy+=rel*ny*.96;}
+  }
+ }
+ draw();
+ if(activeMotion){requestAnimationFrame(tick);return;}
+ moving=false;
+ if(turn==='playerShot'){
+  hs+=shotPocketed;$('hs').textContent=hs;
+  if(balls.filter(b=>b.active&&b!==cue).length===0){finish();return;}
+  turn='bot';$('hint').textContent='minha vez... vou tentar não passar vergonha.';
+  botTimeout=setTimeout(botShot,850);
+ }else if(turn==='botShot'){
+  es+=shotPocketed;$('es').textContent=es;
+  // Keep the bot hilariously ineffective, but it can still move balls.
+  turn='you';$('hint').textContent='sua vez! arraste da bola branca para mirar e escolha a força.';draw();
+ }
+}
+function botShot(){
+ if(gameOver)return;
+ // Bot intentionally aims poorly, uses low power, and misses most of the time.
+ const badAngles=[-.15,Math.PI*.72,Math.PI*1.15,Math.PI*.35];
+ const angle=badAngles[Math.floor(Math.random()*badAngles.length)]+(Math.random()-.5)*.9;
+ const power=10+Math.random()*17;
+ cue.vx=Math.cos(angle)*power*.065;cue.vy=Math.sin(angle)*power*.065;
+ turn='botShot';moving=true;shotPocketed=0;requestAnimationFrame(tick);
+}
+function finish(){gameOver=true;show('win');}
+newGame();
+})();
+</script>
+</body>
+</html>
