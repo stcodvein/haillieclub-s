@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Feliz Aniversário, Haillie! ♡</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        beige: {
+                            50: '#FDFBF7',
+                            100: '#F7F3E9',
+                            200: '#EFE7D5',
+                            300: '#E2D3B7'
+                        },
+                        lilac: {
+                            100: '#F3EDF9',
+                            200: '#E6D7F2',
+                            300: '#D2BBE7',
+                            400: '#B399D4',
+                            500: '#9B72CF'
+                        },
+                        brown: {
+                            400: '#A37C6D',
+                            500: '#7D5A50',
+                            600: '#63443B',
+                            700: '#4A3525'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        hand: ['Caveat', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FDFBF7;
+            color: #4A3525;
+            font-family: 'Nunito', sans-serif;
+            overflow-x: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Sparkle float animation */
+        @keyframes floatSparkle {
+            0% { transform: translateY(0px) rotate(0deg); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        .sparkle {
+            position: absolute;
+            pointer-events: none;
+            animation: floatSparkle 6s linear infinite;
+        }
+
+        /* Washi tape effect */
+        .washi-tape {
+            background: rgba(230, 215, 242, 0.75);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            backdrop-filter: blur(2px);
+            border-left: 2px dashed rgba(255,255,255,0.6);
+            border-right: 2px dashed rgba(255,255,255,0.6);
+        }
+
+        /* Polaroid style card */
+        .polaroid {
+            background: white;
+            padding: 10px 10px 35px 10px;
+            box-shadow: 0 8px 20px rgba(74, 53, 37, 0.12);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .polaroid:hover {
+            transform: scale(1.04) rotate(0deg) !important;
+            z-index: 30;
+            box-shadow: 0 14px 28px rgba(74, 53, 37, 0.2);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F7F3E9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #B399D4;
+            border-radius: 4px;
+        }
+
+        /* Canvas touch fix */
+        canvas {
+            touch-action: none;
+        }
+
+        /* Pulse glow button */
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(179, 153, 212, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(179, 153, 212, 0.8); }
+        }
+        .btn-glow {
+            animation: pulseGlow 2.5s infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen relative flex flex-col justify-between overflow-x-hidden">
+
+    <!-- Ambient floating sparkles container -->
+    <div id="sparkles-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
+
+    <!-- MAIN CONTAINER WITH DYNAMIC VIEWS -->
+    <main class="relative z-10 flex-grow flex flex-col items-center justify-center p-3 sm:p-6">
+
+        <!-- ================= 1. TELA INICIAL ================= -->
+        <section id="screen-intro" class="w-full max-w-xl text-center space-y-8 my-auto py-12 px-6 rounded-3xl bg-white/70 backdrop-blur-md border border-lilac-200 shadow-xl transition-all duration-700">
+            <div class="inline-block p-4 rounded-full bg-lilac-100 text-lilac-500 mb-2 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 15.546c0 1.57-.14 3.012-.413 4.295a1.875 1.875 0 01-2.082 1.458c-1.896-.134-3.873-.787-5.748-1.921-2.072-1.253-3.953-2.915-5.46-4.887C5.792 12.518 4.67 10.457 4.04 8.27a1.875 1.875 0 011.37-2.146c1.235-.325 2.628-.507 4.14-.507.82 0 1.625.053 2.404.156a1.875 1.875 0 011.597 1.584c.264 1.584.73 3.09 1.378 4.472a1.875 1.875 0 01-.482 2.141l-.995.882c1.036 1.65 2.38 3.084 3.96 4.226l.994-.882a1.875 1.875 0 012.18-.329c1.298.675 2.68 1.164 4.107 1.44z" />
+                </svg>
+            </div>
+            
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-serif text-brown-700 leading-tight px-2">
+                fiquei sabendo que você é a aniversariante do dia... <span class="block mt-3 text-lilac-500 font-hand text-4xl sm:text-5xl md:text-6xl">você aceitaria o desafio?</span>
+            </h1>
+
+            <p class="text-brown-600 text-sm sm:text-base max-w-md mx-auto">
+                Vença uma partida rápida de sinuca contra o <b>Eloy</b> no estilo 8-ball para desbloquear o seu presente especial! 🎱✨
+            </p>
+
+            <div class="pt-4">
+                <button id="btn-start" class="btn-glow px-10 py-4 bg-gradient-to-r from-lilac-400 to-lilac-500 hover:from-lilac-500 hover:to-lilac-400 text-white font-bold text-xl rounded-full shadow-lg transform transition active:scale-95 flex items-center justify-center space-x-3 mx-auto">
+                    <span>PLAY 🎱</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ================= 2. MINIGAME DE SINUCA (ESTILO 8-BALL POOL) ================= -->
+        <section id="screen-game" class="hidden w-full max-w-4xl flex-col items-center transition-all duration-500">
+            <!-- Placar & Status da Partida -->
+            <div class="w-full bg-white/90 backdrop-blur-md rounded-2xl p-4 mb-4 shadow-md border border-lilac-200 flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-lilac-400 text-white font-bold flex items-center justify-center shadow">H</div>
+                    <div>
+                        <div class="text-xs text-brown-500 uppercase tracking-wider font-semibold">Haillie</div>
+                        <div id="score-haillie" class="text-lg sm:text-xl font-bold text-lilac-500">0 bolas</div>
+                    </div>
+                </div>
+
+                <div class="text-center px-4 py-1.5 bg-lilac-100 rounded-full border border-lilac-200">
+                    <span id="turn-indicator" class="text-sm font-bold text-brown-700">Sua Vez! Mirar & Tacar</span>
+                </div>
+
+                <div class="flex items-center space-x-3">
+                    <div class="text-right">
+                        <div class="text-xs text-brown-500 uppercase tracking-wider font-semibold">Eloy</div>
+                        <div id="score-eloy" class="text-lg sm:text-xl font-bold text-brown-500">0 bolas</div>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-brown-600 text-white font-bold flex items-center justify-center shadow">E</div>
+                </div>
+            </div>
+
+            <!-- Arena / Mesa de Sinuca estilo 8 Ball Pool -->
+            <div class="relative w-full flex flex-col items-center justify-center bg-brown-700 p-2 sm:p-4 rounded-3xl shadow-2xl border-4 border-brown-600">
+                <canvas id="poolCanvas" class="rounded-xl shadow-2xl cursor-crosshair max-w-full"></canvas>
+
+                <!-- Painel Inferior de Controles 8-Ball Style -->
+                <div id="controls-panel" class="w-full mt-4 flex flex-col sm:flex-row items-center justify-between gap-4 bg-brown-600/80 backdrop-blur p-4 rounded-2xl">
+                    <div class="w-full flex items-center space-x-4">
+                        <span class="text-xs text-lilac-100 font-bold uppercase tracking-wider whitespace-nowrap">Força:</span>
+                        <input id="power-slider" type="range" min="15" max="100" value="55" class="w-full h-4 bg-brown-800 rounded-lg appearance-none cursor-pointer accent-lilac-400">
+                    </div>
+                    <button id="btn-shoot" class="w-full sm:w-auto px-10 py-3 bg-gradient-to-r from-lilac-400 to-lilac-500 hover:from-lilac-500 hover:to-lilac-400 text-white font-bold rounded-xl shadow-lg transition active:scale-95 disabled:opacity-50 text-sm tracking-widest uppercase">
+                        TACAR 🎱
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-xs text-brown-600 mt-3 text-center bg-white/60 px-4 py-2 rounded-full border border-lilac-100 shadow-sm">
+                🎯 <b>Instruções:</b> Arraste na mesa para posicionar o taco com precisão. Regule a força no slider e aperte <b>TACAR</b>.
+            </div>
+        </section>
+
+        <!-- ================= 3. TELA DE VITÓRIA ================= -->
+        <section id="screen-victory" class="hidden w-full max-w-lg text-center space-y-6 my-auto py-10 px-6 rounded-3xl bg-white/80 backdrop-blur-md border border-lilac-300 shadow-2xl transition-all duration-700">
+            <div class="inline-block px-4 py-1.5 bg-lilac-100 rounded-full text-lilac-500 text-sm font-semibold tracking-wide">
+                🎉 VITÓRIA IMPRESSIONANTE!
+            </div>
+            
+            <h2 class="text-3xl sm:text-4xl font-serif text-brown-700">
+                Você venceu o Eloy na sinuca!
+            </h2>
+            
+            <p class="text-brown-600 text-base">
+                Como verdadeira campeã da mesa, você ganhou o troféu de aniversário. Clique nele para abrir seu presente especial!
+            </p>
+
+            <!-- Troféu Clicável -->
+            <div id="trophy-btn" class="relative group cursor-pointer py-6 inline-block transform transition hover:scale-110 active:scale-95">
+                <div class="absolute inset-0 bg-lilac-200/50 rounded-full blur-2xl group-hover:bg-lilac-300/70 transition"></div>
+                <div class="relative text-7xl sm:text-8xl drop-shadow-md animate-bounce">
+                    🏆
+                </div>
+                <div class="mt-2 text-xs font-bold text-lilac-500 tracking-wider uppercase bg-white/90 px-4 py-1.5 rounded-full shadow-sm">
+                    Abrir Presente ✨
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= 4. PÁGINA DO PRESENTE / SCRAPBOOK ================= -->
+        <section id="screen-scrapbook" class="hidden w-full max-w-4xl space-y-12 py-8 transition-all duration-700">
+            
+            <!-- Cabeçalho Scrapbook -->
+            <div class="text-center space-y-3 relative">
+                <div class="inline-block washi-tape px-6 py-2 rounded-sm text-brown-700 font-serif font-bold text-xl sm:text-2xl transform -rotate-1">
+                    ✨ Memórias Inesquecíveis & Nosso Cantinho ✨
+                </div>
+                <h2 class="text-4xl sm:text-5xl font-hand text-lilac-500 font-bold">
+                    Para Haillie, com todo meu carinho ♡
+                </h2>
+            </div>
+
+            <!-- Mural de Fotos (Scrapbook Grid) com as 6 imagens enviadas -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-4">
+                
+                <!-- Foto 1: Juntos 1 -->
+                <div class="polaroid transform -rotate-2 hover:rotate-0">
+                    <div class="washi-tape absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-6 z-10"></div>
+                    <div class="w-full h-64 overflow-hidden rounded bg-beige-100">
+                        <img src="118021_b457d8.jpg" alt="Haillie e Eloy juntos 1" class="w-full h-full object-cover">
+                    </div>
+                    <p class="font-hand text-2xl text-center text-brown-600 mt-3">nós dois ♡</p>
+                </div>
+
+                <!-- Foto 2: Haillie Solo 1 -->
+                <div class="polaroid transform rotate-3 hover:rotate-0">
+                    <div class="washi-tape absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-6 z-10"></div>
+                    <div class="w-full h-64 overflow-hidden rounded bg-beige-100">
+                        <img src="118025_b456e5.jpg" alt="Haillie 1" class="w-full h-full object-cover">
+                    </div>
+                    <p class="font-hand text-2xl text-center text-brown-600 mt-3">aniversariante linda ✨</p>
+                </div>
+
+                <!-- Foto 3: Juntos 2 -->
+                <div class="polaroid transform -rotate-3 hover:rotate-0">
+                    <div class="washi-tape absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-6 z-10"></div>
+                    <div class="w-full h-64 overflow-hidden rounded bg-beige-100">
+                        <img src="118023_b4579f.jpg" alt="Haillie e Eloy juntos 2" class="w-full h-full object-cover">
+                    </div>
+                    <p class="font-hand text-2xl text-center text-brown-600 mt-3">momentos especiais 🌙</p>
+                </div>
+
+                <!-- Foto 4: Haillie Solo 2 -->
+                <div class="polaroid transform rotate-2 hover:rotate-0">
+                    <div class="washi-tape absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-6 z-10"></div>
+                    <div class="w-full h-64 overflow-hidden rounded bg-beige-100">
+                        <img src="118027_b456c6.jpg" alt="Haillie 2" class="w-full h-full object-cover">
+                    </div>
+                    <p class="font-hand text-2xl text-center text-brown-600 mt-3">perfeita! 🌸</p>
+                </div>
+
+                <!-- Foto 5: Juntos 3 -->
+                <div class="polaroid transform -rotate-1 hover:rotate-0">
+                    <div class="washi-tape absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-6 z-10"></div>
+                    <div class="w-full h-64 overflow-hidden rounded bg-beige-100">
+                        <img src="118015_b4571e.jpg" alt="Haillie e Eloy juntos 3" class="w-full h-full object-cover">
+                    </div>
+                    <p class="font-hand text-2xl text-center text-brown-600 mt-3">abraço quentinho 🤍</p>
+                </div>
+
+                <!-- Foto 6: Haillie Solo 3 -->
+                <div class="polaroid transform rotate-3 hover:rotate-0">
+                    <div class="washi-tape absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-6 z-10"></div>
+                    <div class="w-full h-64 overflow-hidden rounded bg-beige-100">
+                        <img src="118029_b40549.jpg" alt="Haillie 3" class="w-full h-full object-cover">
+                    </div>
+                    <p class="font-hand text-2xl text-center text-brown-600 mt-3">sua luz 📖</p>
+                </div>
+
+            </div>
+
+            <!-- ================= 5. CARTA DE ANIVERSÁRIO ================= -->
+            <div class="relative max-w-2xl mx-auto mt-12 px-4">
+                <div class="washi-tape absolute -top-4 left-10 w-32 h-8 z-20"></div>
+                <div class="washi-tape absolute -top-4 right-10 w-32 h-8 z-20"></div>
+
+                <div class="bg-[#FAF6EE] p-8 sm:p-12 rounded-2xl shadow-xl border border-beige-300 relative text-brown-700 leading-relaxed space-y-6">
+                    <div class="text-right text-xs font-serif text-brown-400 uppercase tracking-widest border-b border-beige-300 pb-3">
+                        Carta de Aniversário 💌
+                    </div>
+
+                    <div class="font-sans space-y-4 text-base sm:text-lg whitespace-pre-line text-brown-700">
+feliz aniversário, haillie! ♡
+
+espero que seu dia seja tão especial quanto você é pra mim. que esse novo ciclo te traga muita felicidade, paz, amor e motivos pra sorrir. você merece todas as coisas boas desse mundo, e eu espero que nunca te falte alguém pra te lembrar disso.
+
+eu agradeço todos os dias por ter voltado a falar com você. ter você de volta na minha vida é algo que eu valorizo muito, e eu te amo mais do que consigo explicar. prometo novamente, de dedinho, que nunca mais vou me afastar de você.
+
+obrigado por ser você, por fazer parte da minha vida e por me permitir estar presente em mais um aniversário seu. espero que a gente ainda tenha muitas memórias pra construir, muitas risadas pra dividir e muitos aniversários pra comemorar juntos.
+
+feliz aniversário. te amo muito! ♡
+                    </div>
+
+                    <div class="pt-6 border-t border-beige-300 text-right font-hand text-3xl text-lilac-500">
+                        Com todo amor, Eloy 🌸
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center py-6">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="px-6 py-2.5 bg-lilac-200 hover:bg-lilac-300 text-brown-700 font-semibold rounded-full text-sm transition shadow-sm">
+                    ↑ Voltar ao topo
+                </button>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="relative z-10 text-center py-4 text-xs text-brown-400">
+        Feito especialmente para Haillie ♡ Feliz Aniversário!
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT LOGIC & 8-BALL POOL ENGINE ================= -->
+    <script>
+        // --- Gerador de Brilhos Decorativos ---
+        function createSparkles() {
+            const container = document.getElementById('sparkles-container');
+            const items = ['✨', '🌸', '🤍', '💫', '🎈'];
+            for (let i = 0; i < 18; i++) {
+                const el = document.createElement('div');
+                el.className = 'sparkle';
+                el.innerText = items[Math.floor(Math.random() * items.length)];
+                el.style.left = Math.random() * 100 + 'vw';
+                el.style.top = Math.random() * 100 + 'vh';
+                el.style.animationDelay = (Math.random() * 5) + 's';
+                el.style.fontSize = (Math.random() * 12 + 14) + 'px';
+                container.appendChild(el);
+            }
+        }
+        createSparkles();
+
+        // --- Navegação entre Telas ---
+        const screenIntro = document.getElementById('screen-intro');
+        const screenGame = document.getElementById('screen-game');
+        const screenVictory = document.getElementById('screen-victory');
+        const screenScrapbook = document.getElementById('screen-scrapbook');
+
+        function switchScreen(from, to) {
+            from.classList.add('hidden');
+            to.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.getElementById('btn-start').addEventListener('click', () => {
+            switchScreen(screenIntro, screenGame);
+            initPoolGame();
+        });
+
+        document.getElementById('trophy-btn').addEventListener('click', () => {
+            switchScreen(screenVictory, screenScrapbook);
+        });
+
+
+        // ================= 8 BALL POOL ENGINE REALISTA =================
+        let canvas, ctx;
+        let balls = [];
+        let pockets = [];
+        let isPlayerTurn = true;
+        let isMoving = false;
+        let aimAngle = 0; // em radianos
+        let scoreHaillie = 0;
+        let scoreEloy = 0;
+        let gameFinished = false;
+
+        const TABLE_WIDTH = 760;
+        const TABLE_HEIGHT = 420;
+        const BALL_RADIUS = 12.5;
+        const FRICTION = 0.986;
+        const POCKET_RADIUS = 26;
+
+        class Ball {
+            constructor(x, y, color, number, isCue = false) {
+                this.x = x;
+                this.y = y;
+                this.vx = 0;
+                this.vy = 0;
+                this.color = color;
+                this.number = number;
+                this.isCue = isCue;
+                this.pocketed = false;
+            }
+
+            update() {
+                if (this.pocketed) return;
+
+                this.x += this.vx;
+                this.y += this.vy;
+
+                this.vx *= FRICTION;
+                this.vy *= FRICTION;
+
+                if (Math.abs(this.vx) < 0.04) this.vx = 0;
+                if (Math.abs(this.vy) < 0.04) this.vy = 0;
+
+                // Colisão com bordas verdes da mesa
+                const minX = 42 + BALL_RADIUS;
+                const maxX = TABLE_WIDTH - 42 - BALL_RADIUS;
+                const minY = 42 + BALL_RADIUS;
+                const maxY = TABLE_HEIGHT - 42 - BALL_RADIUS;
+
+                if (this.x < minX) { this.x = minX; this.vx *= -0.88; }
+                if (this.x > maxX) { this.x = maxX; this.vx *= -0.88; }
+                if (this.y < minY) { this.y = minY; this.vy *= -0.88; }
+                if (this.y > maxY) { this.y = maxY; this.vy *= -0.88; }
+
+                // Verificação de Encaçapamento
+                pockets.forEach(p => {
+                    const dist = Math.hypot(this.x - p.x, this.y - p.y);
+                    if (dist < POCKET_RADIUS) {
+                        this.pocketed = true;
+                        this.vx = 0;
+                        this.vy = 0;
+                        onBallPocketed(this);
+                    }
+                });
+            }
+
+            draw() {
+                if (this.pocketed) return;
+
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, BALL_RADIUS, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.35)';
+                ctx.shadowBlur = 5;
+                ctx.shadowOffsetY = 2;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+
+                // Brilho tridimensional de esfera 8-ball
+                ctx.beginPath();
+                ctx.arc(this.x - 3.5, this.y - 3.5, BALL_RADIUS * 0.35, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
+                ctx.fill();
+
+                // Círculo central com número
+                if (!this.isCue) {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, BALL_RADIUS * 0.48, 0, Math.PI * 2);
+                    ctx.fillStyle = '#FFFFFF';
+                    ctx.fill();
+
+                    ctx.fillStyle = '#2A1B17';
+                    ctx.font = 'bold 9px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(this.number, this.x, this.y + 0.5);
+                }
+
+                ctx.restore();
+            }
+        }
+
+        function initPoolGame() {
+            canvas = document.getElementById('poolCanvas');
+            ctx = canvas.getContext('2d');
+
+            canvas.width = TABLE_WIDTH;
+            canvas.height = TABLE_HEIGHT;
+
+            // 6 Caçapas estilo 8-ball
+            pockets = [
+                { x: 42, y: 42 },
+                { x: TABLE_WIDTH / 2, y: 35 },
+                { x: TABLE_WIDTH - 42, y: 42 },
+                { x: 42, y: TABLE_HEIGHT - 42 },
+                { x: TABLE_WIDTH / 2, y: TABLE_HEIGHT - 35 },
+                { x: TABLE_WIDTH - 42, y: TABLE_HEIGHT - 42 }
+            ];
+
+            resetBalls();
+            setupControls();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function resetBalls() {
+            balls = [];
+            // Bola Branca
+            balls.push(new Ball(200, TABLE_HEIGHT / 2, '#FFFFFF', 0, true));
+
+            // 5 Bolas Coloridas (Paleta personalizada lilás/marrom/ouro)
+            const colors = ['#B399D4', '#7D5A50', '#9B72CF', '#A37C6D', '#D2BBE7'];
+            const startX = 520;
+            const startY = TABLE_HEIGHT / 2;
+
+            const offsets = [
+                { x: 0, y: 0 },
+                { x: 24, y: -14 },
+                { x: 24, y: 14 },
+                { x: 48, y: -28 },
+                { x: 48, y: 28 }
+            ];
+
+            for (let i = 0; i < 5; i++) {
+                balls.push(new Ball(startX + offsets[i].x, startY + offsets[i].y, colors[i], i + 1));
+            }
+
+            scoreHaillie = 0;
+            scoreEloy = 0;
+            isPlayerTurn = true;
+            gameFinished = false;
+            updateScoreboard();
+        }
+
+        function updateScoreboard() {
+            document.getElementById('score-haillie').innerText = `${scoreHaillie} bola(s)`;
+            document.getElementById('score-eloy').innerText = `${scoreEloy} bola(s)`;
+            
+            const turnInd = document.getElementById('turn-indicator');
+            const btnShoot = document.getElementById('btn-shoot');
+
+            if (isPlayerTurn) {
+                turnInd.innerText = "Sua Vez, Haillie! Mirar & Tacar";
+                turnInd.className = "text-sm font-bold text-lilac-500";
+                btnShoot.disabled = false;
+            } else {
+                turnInd.innerText = "Vez do Eloy pensando...";
+                turnInd.className = "text-sm font-bold text-brown-500 animate-pulse";
+                btnShoot.disabled = true;
+            }
+        }
+
+        function onBallPocketed(ball) {
+            if (ball.isCue) {
+                setTimeout(() => {
+                    ball.pocketed = false;
+                    ball.x = 200;
+                    ball.y = TABLE_HEIGHT / 2;
+                    ball.vx = 0;
+                    ball.vy = 0;
+                }, 800);
+                return;
+            }
+
+            if (isPlayerTurn) {
+                scoreHaillie++;
+            } else {
+                scoreEloy++;
+            }
+            updateScoreboard();
+            checkGameEnd();
+        }
+
+        function checkGameEnd() {
+            const activeColorBalls = balls.filter(b => !b.isCue && !b.pocketed);
+
+            if (activeColorBalls.length === 0 || scoreHaillie >= 3) {
+                gameFinished = true;
+                setTimeout(() => {
+                    switchScreen(screenGame, screenVictory);
+                }, 1000);
+            }
+        }
+
+        function handleCollisions() {
+            for (let i = 0; i < balls.length; i++) {
+                for (let j = i + 1; j < balls.length; j++) {
+                    let b1 = balls[i];
+                    let b2 = balls[j];
+
+                    if (b1.pocketed || b2.pocketed) continue;
+
+                    let dx = b2.x - b1.x;
+                    let dy = b2.y - b1.y;
+                    let dist = Math.hypot(dx, dy);
+
+                    if (dist < BALL_RADIUS * 2) {
+                        let overlap = (BALL_RADIUS * 2) - dist;
+                        let nx = dx / (dist || 1);
+                        let ny = dy / (dist || 1);
+
+                        b1.x -= nx * overlap * 0.5;
+                        b1.y -= ny * overlap * 0.5;
+                        b2.x += nx * overlap * 0.5;
+                        b2.y += ny * overlap * 0.5;
+
+                        let kx = b1.vx - b2.vx;
+                        let ky = b1.vy - b2.vy;
+                        let p = 2 * (nx * kx + ny * ky) / 2;
+
+                        b1.vx -= p * nx;
+                        b1.vy -= p * ny;
+                        b2.vx += p * nx;
+                        b2.vy += p * ny;
+                    }
+                }
+            }
+        }
+
+        function triggerEloyTurn() {
+            if (gameFinished) return;
+
+            setTimeout(() => {
+                const cue = balls[0];
+                const activeBalls = balls.filter(b => !b.isCue && !b.pocketed);
+
+                if (activeBalls.length === 0) {
+                    checkGameEnd();
+                    return;
+                }
+
+                const target = activeBalls[Math.floor(Math.random() * activeBalls.length)];
+                let angle = Math.atan2(target.y - cue.y, target.x - cue.x);
+
+                // Pequeno desvio para o Eloy errar algumas tacadas
+                angle += (Math.random() - 0.5) * 0.35;
+                const power = 18 + Math.random() * 18;
+
+                cue.vx = Math.cos(angle) * power;
+                cue.vy = Math.sin(angle) * power;
+
+                isMoving = true;
+
+                setTimeout(() => {
+                    isPlayerTurn = true;
+                    updateScoreboard();
+                }, 3200);
+
+            }, 1400);
+        }
+
+        // --- Renderização da Mesa 8-Ball ---
+        function drawTable() {
+            // 1. Madeira Externa
+            ctx.fillStyle = '#4A3525';
+            ctx.beginPath();
+            ctx.roundRect(0, 0, TABLE_WIDTH, TABLE_HEIGHT, 28);
+            ctx.fill();
+
+            // Diamantes decorativos nas bordas (Estilo 8-Ball Pool)
+            ctx.fillStyle = '#EFE7D5';
+            const diamondCoords = [
+                {x: TABLE_WIDTH * 0.25, y: 14}, {x: TABLE_WIDTH * 0.5, y: 14}, {x: TABLE_WIDTH * 0.75, y: 14},
+                {x: TABLE_WIDTH * 0.25, y: TABLE_HEIGHT - 14}, {x: TABLE_WIDTH * 0.5, y: TABLE_HEIGHT - 14}, {x: TABLE_WIDTH * 0.75, y: TABLE_HEIGHT - 14},
+                {x: 14, y: TABLE_HEIGHT * 0.33}, {x: 14, y: TABLE_HEIGHT * 0.66},
+                {x: TABLE_WIDTH - 14, y: TABLE_HEIGHT * 0.33}, {x: TABLE_WIDTH - 14, y: TABLE_HEIGHT * 0.66}
+            ];
+            diamondCoords.forEach(d => {
+                ctx.beginPath();
+                ctx.arc(d.x, d.y, 3, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // 2. Moldura Interna da Mesa
+            ctx.fillStyle = '#63443B';
+            ctx.beginPath();
+            ctx.roundRect(22, 22, TABLE_WIDTH - 44, TABLE_HEIGHT - 44, 20);
+            ctx.fill();
+
+            // 3. Feltro Verde Profissional de Sinuca
+            ctx.fillStyle = '#1E5E3A';
+            ctx.beginPath();
+            ctx.roundRect(42, 42, TABLE_WIDTH - 84, TABLE_HEIGHT - 84, 10);
+            ctx.fill();
+
+            // Linha de Saída
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(200, 42);
+            ctx.lineTo(200, TABLE_HEIGHT - 42);
+            ctx.stroke();
+
+            // Semicírculo de Saída
+            ctx.beginPath();
+            ctx.arc(200, TABLE_HEIGHT / 2, 45, Math.PI * 0.5, Math.PI * 1.5);
+            ctx.stroke();
+
+            // Desenhar Caçapas Reais
+            pockets.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, POCKET_RADIUS, 0, Math.PI * 2);
+                ctx.fillStyle = '#0D0907';
+                ctx.fill();
+                ctx.strokeStyle = '#382519';
+                ctx.lineWidth = 4;
+                ctx.stroke();
+            });
+        }
+
+        // --- Desenho da Linha de Mira Guia & Taco 8-Ball ---
+        function drawAimLineAndCue() {
+            if (!isPlayerTurn || isMoving) return;
+
+            const cue = balls[0];
+            if (cue.pocketed) return;
+
+            const dx = Math.cos(aimAngle);
+            const dy = Math.sin(aimAngle);
+
+            // 1. Trajetória com Raycasting Simples para Guia Estilo 8-Ball
+            let hitX = cue.x;
+            let hitY = cue.y;
+            let targetBall = null;
+            let minDistance = 9999;
+
+            // Busca colisão com bolas alvos
+            balls.forEach(b => {
+                if (b.isCue || b.pocketed) return;
+
+                // Projeção no raio da mira
+                const bx = b.x - cue.x;
+                const by = b.y - cue.y;
+                const dot = bx * dx + by * dy;
+
+                if (dot > 0) {
+                    const perpDist = Math.abs(bx * (-dy) + by * dx);
+                    if (perpDist < BALL_RADIUS * 2) {
+                        const hitDist = dot - Math.sqrt(Math.pow(BALL_RADIUS * 2, 2) - Math.pow(perpDist, 2));
+                        if (hitDist > 0 && hitDist < minDistance) {
+                            minDistance = hitDist;
+                            targetBall = b;
+                        }
+                    }
+                }
+            });
+
+            if (targetBall) {
+                hitX = cue.x + dx * minDistance;
+                hitY = cue.y + dy * minDistance;
+            } else {
+                // Se não acertar bola, estende a guia até a borda da mesa
+                hitX = cue.x + dx * 350;
+                hitY = cue.y + dy * 350;
+            }
+
+            // Linha-Guia Pontilhada Estilo 8 Ball Pool
+            ctx.save();
+            ctx.beginPath();
+            ctx.setLineDash([8, 6]);
+            ctx.moveTo(cue.x, cue.y);
+            ctx.lineTo(hitX, hitY);
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.95)';
+            ctx.lineWidth = 2.5;
+            ctx.stroke();
+
+            // Círculo indicador no ponto de impacto
+            ctx.beginPath();
+            ctx.setLineDash([]);
+            ctx.arc(hitX, hitY, BALL_RADIUS, 0, Math.PI * 2);
+            ctx.strokeStyle = 'rgba(230, 215, 242, 0.9)';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            ctx.restore();
+
+            // 2. Taco Hiper-Realista Estilo 8-Ball
+            ctx.save();
+            ctx.translate(cue.x, cue.y);
+            ctx.rotate(aimAngle + Math.PI); // Taco fica virado para trás da branca
+
+            const pSlider = document.getElementById('power-slider');
+            const pullBack = pSlider ? pSlider.value * 0.45 : 20;
+
+            // Ponta do Taco (Couro Azul/Branco)
+            ctx.fillStyle = '#64B5F6';
+            ctx.fillRect(pullBack + 12, -2.5, 4, 5);
+
+            // Anel de Latão Dourado
+            ctx.fillStyle = '#FFD54F';
+            ctx.fillRect(pullBack + 16, -3, 5, 6);
+
+            // Corpo da Madeira do Taco (Gradiente Realista)
+            let woodGradient = ctx.createLinearGradient(pullBack + 21, 0, pullBack + 320, 0);
+            woodGradient.addColorStop(0, '#EFE7D5');
+            woodGradient.addColorStop(0.3, '#A37C6D');
+            woodGradient.addColorStop(1, '#4A3525');
+
+            ctx.fillStyle = woodGradient;
+            ctx.beginPath();
+            ctx.moveTo(pullBack + 21, -3);
+            ctx.lineTo(pullBack + 320, -6);
+            ctx.lineTo(pullBack + 320, 6);
+            ctx.lineTo(pullBack + 21, 3);
+            ctx.closePath();
+            ctx.fill();
+
+            // Detalhes da Empunhadura do Taco 8-Ball
+            ctx.fillStyle = '#1A120B';
+            ctx.fillRect(pullBack + 220, -5.5, 90, 11);
+
+            ctx.restore();
+        }
+
+        function gameLoop() {
+            ctx.clearRect(0, 0, TABLE_WIDTH, TABLE_HEIGHT);
+
+            drawTable();
+
+            let currentlyMoving = false;
+            balls.forEach(b => {
+                b.update();
+                b.draw();
+                if (Math.abs(b.vx) > 0 || Math.abs(b.vy) > 0) {
+                    currentlyMoving = true;
+                }
+            });
+
+            handleCollisions();
+            drawAimLineAndCue();
+
+            isMoving = currentlyMoving;
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        function shootCueBall() {
+            if (!isPlayerTurn || isMoving) return;
+
+            const cue = balls[0];
+            const powerInput = document.getElementById('power-slider').value;
+            const power = powerInput * 0.38;
+
+            cue.vx = Math.cos(aimAngle) * power;
+            cue.vy = Math.sin(aimAngle) * power;
+
+            isPlayerTurn = false;
+            updateScoreboard();
+
+            triggerEloyTurn();
+        }
+
+        function setupControls() {
+            const btnShoot = document.getElementById('btn-shoot');
+            btnShoot.addEventListener('click', shootCueBall);
+
+            function updateAngleFromEvent(e) {
+                const rect = canvas.getBoundingClientRect();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+                const mouseX = (clientX - rect.left) * (TABLE_WIDTH / rect.width);
+                const mouseY = (clientY - rect.top) * (TABLE_HEIGHT / rect.height);
+
+                const cue = balls[0];
+                aimAngle = Math.atan2(mouseY - cue.y, mouseX - cue.x);
+            }
+
+            canvas.addEventListener('mousemove', (e) => {
+                if (isPlayerTurn && !isMoving) updateAngleFromEvent(e);
+            });
+
+            canvas.addEventListener('touchmove', (e) => {
+                if (isPlayerTurn && !isMoving) {
+                    updateAngleFromEvent(e);
+                    e.preventDefault();
+                }
+            }, { passive: false });
+
+            canvas.addEventListener('touchstart', (e) => {
+                if (isPlayerTurn && !isMoving) {
+                    updateAngleFromEvent(e);
+                }
+            }, { passive: true });
+        }
+    </script>
+</body>
+</html>
